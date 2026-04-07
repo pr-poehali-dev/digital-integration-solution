@@ -20,6 +20,12 @@ export default function Header({ className }: HeaderProps) {
           >
             Расписание
           </a>
+          <a
+            href="#about"
+            className="text-white hover:text-neutral-400 transition-colors duration-300 uppercase text-sm"
+          >
+            Об авторе
+          </a>
         </nav>
       </div>
     </header>

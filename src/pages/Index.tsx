@@ -8,6 +8,7 @@ import Schedule from "@/components/Schedule";
 import Trainers from "@/components/Trainers";
 import Reviews from "@/components/Reviews";
 import MapSection from "@/components/MapSection";
+import About from "@/components/About";
 import Footer from "@/components/Footer";
 import SignupModal from "@/components/SignupModal";
 
@@ -24,6 +25,7 @@ const Index = () => {
       <Trainers onSignup={() => setModalOpen(true)} />
       <Reviews />
       <MapSection />
+      <About />
       <Promo />
       <Footer />
       <SignupModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
