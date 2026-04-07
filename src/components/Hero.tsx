@@ -1,7 +1,11 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 
-export default function Hero() {
+interface HeroProps {
+  onSignup: () => void;
+}
+
+export default function Hero({ onSignup }: HeroProps) {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -34,7 +38,10 @@ export default function Hero() {
         <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 mb-8">
           Видеоуроки, персональные программы и живые занятия с тренером — всё в одном месте
         </p>
-        <button className="bg-white text-black px-8 py-3 uppercase tracking-wide text-sm font-semibold hover:bg-neutral-200 transition-colors duration-300 cursor-pointer">
+        <button
+          onClick={onSignup}
+          className="bg-white text-black px-8 py-3 uppercase tracking-wide text-sm font-semibold hover:bg-neutral-200 transition-colors duration-300 cursor-pointer"
+        >
           Начать тренировки
         </button>
       </div>
