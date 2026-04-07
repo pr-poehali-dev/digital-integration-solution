@@ -7,14 +7,32 @@ interface SignupModalProps {
   onClose: () => void;
 }
 
+const SEND_LEAD_URL = "https://functions.poehali.dev/93db65f7-6d90-4edb-9b80-3755e014714f";
+
 export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(SEND_LEAD_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone }),
+      });
+      if (!res.ok) throw new Error();
+      setSubmitted(true);
+    } catch {
+      setError("Не удалось отправить заявку. Попробуйте ещё раз.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClose = () => {
@@ -86,11 +104,15 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
                       className="w-full border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black transition-colors"
                     />
                   </div>
+                  {error && (
+                    <p className="text-red-500 text-sm">{error}</p>
+                  )}
                   <button
                     type="submit"
-                    className="bg-black text-white py-3 uppercase tracking-wide text-sm font-semibold hover:bg-neutral-800 transition-colors mt-2 cursor-pointer"
+                    disabled={loading}
+                    className="bg-black text-white py-3 uppercase tracking-wide text-sm font-semibold hover:bg-neutral-800 transition-colors mt-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Отправить заявку
+                    {loading ? "Отправляем..." : "Отправить заявку"}
                   </button>
                 </form>
               </>
