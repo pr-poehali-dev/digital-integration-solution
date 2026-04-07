@@ -39,10 +39,10 @@ export default function MapSection() {
               <div>
                 <p className="font-semibold text-neutral-900 mb-1">Телефон</p>
                 <a
-                  href="tel:+78005553535"
+                  href="tel:+79276904709"
                   className="text-neutral-500 text-sm hover:text-black transition-colors"
                 >
-                  +7 (800) 555-35-35
+                  +7 (927) 690-47-09
                 </a>
               </div>
             </div>
